@@ -1,5 +1,6 @@
 package com.telegram.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -30,6 +32,8 @@ public class Route implements Serializable {
   private LocalDate created;
   @Column(name = "modified")
   private LocalDate modified;
+  @ManyToOne(cascade = CascadeType.ALL)
+  private User user;
 
   public Long getId() {
     return id;
@@ -79,6 +83,14 @@ public class Route implements Serializable {
     this.modified = modified;
   }
 
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -86,11 +98,25 @@ public class Route implements Serializable {
     Route route = (Route) o;
     return Objects.equals(id, route.id) && color == route.color &&
            Objects.equals(description, route.description) && Objects.equals(count, route.count) &&
-           Objects.equals(created, route.created) && Objects.equals(modified, route.modified);
+           Objects.equals(created, route.created) && Objects.equals(modified, route.modified) &&
+           Objects.equals(user, route.user);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, color, description, count, created, modified);
+    return Objects.hash(id, color, description, count, created, modified, user);
+  }
+
+  @Override
+  public String toString() {
+    return "Route{" +
+           "id=" + id +
+           ", color=" + color +
+           ", description='" + description + '\'' +
+           ", count=" + count +
+           ", created=" + created +
+           ", modified=" + modified +
+           ", user=" + user +
+           '}';
   }
 }

@@ -18,15 +18,7 @@ CREATE TABLE IF NOT EXISTS route
     count       INT          NOT NULL,
     created     TIMESTAMP    NOT NULL,
     modified    TIMESTAMP    NOT NULL,
-    CONSTRAINT pk_route PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS user_route
-(
-    id       SERIAL,
-    user_id  INT NOT NULL,
-    route_id INT NOT NULL,
-    CONSTRAINT pk_user_route PRIMARY KEY (id),
-    CONSTRAINT fk_route FOREIGN KEY (route_id) REFERENCES route (id) ON DELETE CASCADE,
-    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+    user_id     INT          NOT NULL,
+    CONSTRAINT pk_route PRIMARY KEY (id),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users (id)
 );

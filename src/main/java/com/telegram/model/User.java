@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -34,10 +35,7 @@ public class User implements Serializable {
   private LocalDate created;
   @Column(name = "modified")
   private LocalDate modified;
-  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  @JoinTable(name = "user_route",
-             joinColumns = {@JoinColumn(name = "user_id")},
-             inverseJoinColumns = {@JoinColumn(name = "route_id")})
+  @OneToMany(mappedBy = "user_id")
   private Set<Route> routes;
 
   public Long getId() {
