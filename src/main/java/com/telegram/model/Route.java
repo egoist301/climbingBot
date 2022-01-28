@@ -35,7 +35,7 @@ public class Route implements Serializable {
   @Column(name = "modified")
   private LocalDate modified;
   @ManyToOne(cascade = CascadeType.ALL)
-  private User user;
+  private TelegramUser user;
 
   public Long getId() {
     return id;
@@ -85,11 +85,11 @@ public class Route implements Serializable {
     this.modified = modified;
   }
 
-  public User getUser() {
+  public TelegramUser getUser() {
     return user;
   }
 
-  public void setUser(User user) {
+  public void setUser(TelegramUser user) {
     this.user = user;
   }
 

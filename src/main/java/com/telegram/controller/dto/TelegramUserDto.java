@@ -2,6 +2,7 @@ package com.telegram.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Length;
+import org.telegram.telegrambots.meta.api.objects.User;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +11,7 @@ import javax.validation.constraints.PositiveOrZero;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserDto {
+public class TelegramUserDto {
   @PositiveOrZero(message = "Id can`t be smaller than 0")
   private Long id;
   @NotBlank(message = "First name can`t be null and spaces!")
@@ -30,6 +31,16 @@ public class UserDto {
   private Long chatId;
   @Valid
   private Set<RouteDto> routeDtos;
+
+  public TelegramUserDto() {
+  }
+
+  public TelegramUserDto(User user, Long chatId) {
+    this.userName = user.getUserName();
+    this.firstName = user.getFirstName();
+    this.lastName = user.getLastName();
+    this.chatId = chatId;
+  }
 
   public Long getId() {
     return id;

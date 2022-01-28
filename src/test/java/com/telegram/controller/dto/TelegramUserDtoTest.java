@@ -14,7 +14,7 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
-public class UserDtoTest {
+public class TelegramUserDtoTest {
   private static Validator validator;
 
   @BeforeClass
@@ -26,7 +26,7 @@ public class UserDtoTest {
   @Test
   public void negativeId() {
     // Given
-    UserDto userDto = new UserDto();
+    TelegramUserDto userDto = new TelegramUserDto();
     userDto.setId(-1L);
     userDto.setFirstName("John");
     userDto.setLastName("Wick");
@@ -34,7 +34,7 @@ public class UserDtoTest {
     userDto.setChatId(1L);
 
     // When
-    Set<ConstraintViolation<UserDto>> constraintViolations =
+    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
         validator.validate(userDto);
 
     // Then
@@ -46,14 +46,14 @@ public class UserDtoTest {
   @Test
   public void negativeChatId() {
     // Given
-    UserDto userDto = new UserDto();
+    TelegramUserDto userDto = new TelegramUserDto();
     userDto.setFirstName("John");
     userDto.setLastName("Wick");
     userDto.setUserName("chapter");
     userDto.setChatId(-1L);
 
     // When
-    Set<ConstraintViolation<UserDto>> constraintViolations =
+    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
         validator.validate(userDto);
 
     // Then
@@ -65,12 +65,12 @@ public class UserDtoTest {
   @Test
   public void chatIdIsNull() {
     // Given
-    UserDto userDto = new UserDto();
+    TelegramUserDto userDto = new TelegramUserDto();
     userDto.setFirstName("John");
     userDto.setLastName("Wick");
     userDto.setUserName("chapter");
     // When
-    Set<ConstraintViolation<UserDto>> constraintViolations =
+    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
         validator.validate(userDto);
 
     // Then
@@ -82,14 +82,14 @@ public class UserDtoTest {
   @Test
   public void largeUsername() {
     // Given
-    UserDto userDto = new UserDto();
+    TelegramUserDto userDto = new TelegramUserDto();
     userDto.setFirstName("John");
     userDto.setLastName("Wick");
     userDto.setUserName("chapterchapterchapter");
     userDto.setChatId(1L);
 
     // When
-    Set<ConstraintViolation<UserDto>> constraintViolations =
+    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
         validator.validate(userDto);
 
     // Then
@@ -101,14 +101,14 @@ public class UserDtoTest {
   @Test
   public void smallUsername() {
     // Given
-    UserDto userDto = new UserDto();
+    TelegramUserDto userDto = new TelegramUserDto();
     userDto.setFirstName("John");
     userDto.setLastName("Wick");
     userDto.setUserName("c");
     userDto.setChatId(1L);
 
     // When
-    Set<ConstraintViolation<UserDto>> constraintViolations =
+    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
         validator.validate(userDto);
 
     // Then
@@ -120,13 +120,13 @@ public class UserDtoTest {
   @Test
   public void usernameIsNull() {
     // Given
-    UserDto userDto = new UserDto();
+    TelegramUserDto userDto = new TelegramUserDto();
     userDto.setFirstName("John");
     userDto.setLastName("Wick");
     userDto.setChatId(1L);
 
     // When
-    Set<ConstraintViolation<UserDto>> constraintViolations =
+    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
         validator.validate(userDto);
 
     // Then
@@ -138,14 +138,14 @@ public class UserDtoTest {
   @Test
   public void usernameIsBlank() {
     // Given
-    UserDto userDto = new UserDto();
+    TelegramUserDto userDto = new TelegramUserDto();
     userDto.setFirstName("John");
     userDto.setLastName("Wick");
     userDto.setUserName("        ");
     userDto.setChatId(1L);
 
     // When
-    Set<ConstraintViolation<UserDto>> constraintViolations =
+    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
         validator.validate(userDto);
 
     // Then

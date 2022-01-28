@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
 
 import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
 
@@ -25,5 +26,10 @@ public class AppConfig {
         .setSkipNullEnabled(true)
         .setFieldAccessLevel(PRIVATE);
     return mapper;
+  }
+
+  @Bean
+  public TelegramBotsApi telegramBotsApi() {
+    return new TelegramBotsApi();
   }
 }

@@ -1,7 +1,7 @@
 package com.telegram.controller;
 
-import com.telegram.controller.dto.UserDto;
-import com.telegram.service.UserService;
+import com.telegram.controller.dto.TelegramUserDto;
+import com.telegram.service.TelegramUserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,26 +21,26 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
-  private final UserService userService;
+public class TelegramUserController {
+  private final TelegramUserService telegramUserService;
 
-  public UserController(UserService userService) {
-    this.userService = userService;
+  public TelegramUserController(TelegramUserService telegramUserService) {
+    this.telegramUserService = telegramUserService;
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<UserDto> get(@PathVariable(name = "id") Long id) {
-    return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+  public ResponseEntity<TelegramUserDto> get(@PathVariable(name = "id") Long id) {
+    return new ResponseEntity<>(telegramUserService.findById(id), HttpStatus.OK);
   }
 
   @GetMapping
-  public ResponseEntity<List<UserDto>> getAll() {
-    return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+  public ResponseEntity<List<TelegramUserDto>> getAll() {
+    return new ResponseEntity<>(telegramUserService.findAll(), HttpStatus.OK);
   }
 
   @PostMapping
-  public ResponseEntity<UserDto> save(@RequestBody @Valid UserDto userDto) {
-    UserDto savedUser = userService.save(userDto);
+  public ResponseEntity<TelegramUserDto> save(@RequestBody @Valid TelegramUserDto userDto) {
+    TelegramUserDto savedUser = telegramUserService.save(userDto);
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                                 .buildAndExpand(savedUser.getId()).toUri());
@@ -48,16 +48,16 @@ public class UserController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<UserDto> update(@RequestBody @Valid UserDto userDto,
-                                        @PathVariable(name = "id") Long id) {
+  public ResponseEntity<TelegramUserDto> update(@RequestBody @Valid TelegramUserDto userDto,
+                                                @PathVariable(name = "id") Long id) {
 
     userDto.setId(id);
-    return new ResponseEntity<>(userService.update(userDto), HttpStatus.OK);
+    return new ResponseEntity<>(telegramUserService.update(userDto), HttpStatus.OK);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/{id}")
   public void delete(@PathVariable(name = "id") Long id) {
-    userService.delete(id);
+    telegramUserService.delete(id);
   }
 }

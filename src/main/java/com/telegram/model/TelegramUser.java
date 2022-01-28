@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class TelegramUser implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, unique = true)
@@ -115,7 +115,7 @@ public class User implements Serializable {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    User user = (User) o;
+    TelegramUser user = (TelegramUser) o;
     return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) &&
            Objects.equals(lastName, user.lastName) && Objects.equals(userName, user.userName) &&
            Objects.equals(chatId, user.chatId) && Objects.equals(routes, user.routes) &&

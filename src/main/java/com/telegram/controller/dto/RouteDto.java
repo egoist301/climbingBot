@@ -21,7 +21,10 @@ public class RouteDto {
   private Integer count;
   private LocalDate created;
   @Valid
-  private UserDto userDto;
+  private TelegramUserDto userDto;
+
+  public RouteDto() {
+  }
 
   public Long getId() {
     return id;
@@ -63,11 +66,11 @@ public class RouteDto {
     this.created = created;
   }
 
-  public UserDto getUserDto() {
+  public TelegramUserDto getUserDto() {
     return userDto;
   }
 
-  public void setUserDto(UserDto userDto) {
+  public void setUserDto(TelegramUserDto userDto) {
     this.userDto = userDto;
   }
 }

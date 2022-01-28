@@ -1,6 +1,6 @@
 package com.telegram.model;
 
-public enum State {
+public enum BotState {
   NONE,
   START,
 }
