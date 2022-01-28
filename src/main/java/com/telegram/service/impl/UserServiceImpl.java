@@ -8,9 +8,11 @@ import com.telegram.service.exception.ResourceNotFoundException;
 import com.telegram.service.mapper.RouteMapper;
 import com.telegram.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
   private final UserMapper userMapper;

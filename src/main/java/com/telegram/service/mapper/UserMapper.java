@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper extends AbstractMapper<User, UserDto> {
   @Autowired
-  protected UserMapper(Class<User> entityClass, Class<UserDto> dtoClass, ModelMapper mapper) {
-    super(entityClass, dtoClass, mapper);
+  protected UserMapper(ModelMapper mapper) {
+    super(User.class, UserDto.class, mapper);
   }
 }

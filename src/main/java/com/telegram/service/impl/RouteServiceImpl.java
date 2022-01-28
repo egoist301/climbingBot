@@ -9,6 +9,7 @@ import com.telegram.service.exception.ResourceNotFoundException;
 import com.telegram.service.mapper.RouteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import static com.telegram.repository.specification.RouteSpecification.findByCol
 import static com.telegram.repository.specification.RouteSpecification.findByCreated;
 import static com.telegram.repository.specification.RouteSpecification.findByUserId;
 
+@Service
 public class RouteServiceImpl implements RouteService {
   private final RouteRepository routeRepository;
   private final RouteMapper routeMapper;

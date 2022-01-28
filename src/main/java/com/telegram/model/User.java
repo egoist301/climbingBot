@@ -33,7 +33,7 @@ public class User implements Serializable {
   private LocalDate created;
   @Column(name = "modified")
   private LocalDate modified;
-  @OneToMany(mappedBy = "user_id")
+  @OneToMany(mappedBy = "user")
   private Set<Route> routes;
 
   public Long getId() {

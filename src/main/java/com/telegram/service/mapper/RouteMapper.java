@@ -3,9 +3,13 @@ package com.telegram.service.mapper;
 import com.telegram.controller.dto.RouteDto;
 import com.telegram.model.Route;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RouteMapper extends AbstractMapper<Route, RouteDto> {
-  protected RouteMapper(Class<Route> entityClass, Class<RouteDto> dtoClass, ModelMapper mapper) {
-    super(entityClass, dtoClass, mapper);
+  @Autowired
+  public RouteMapper(ModelMapper mapper) {
+    super(Route.class, RouteDto.class, mapper);
   }
 }
