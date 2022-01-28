@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Set;
 
@@ -24,7 +25,8 @@ public class UserDto {
   @Length(min = 2, max = 20,
           message = "Username should be less than 20 and bigger than 2 characters")
   private String userName;
-  @PositiveOrZero(message = "Id can`t be smaller than 0")
+  @NotNull(message = "Chat id can`t be null")
+  @PositiveOrZero(message = "Chat id can`t be smaller than 0")
   private Long chatId;
   @Valid
   private Set<RouteDto> routeDtos;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.telegram.model.Color;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ public class RouteDto {
   private Color color = Color.WHITE;
   @Pattern(regexp = ".{0,255}", message = "Description can`t be bigger then 255 symbols")
   private String description;
+  @NotNull(message = "Count can`t be null")
   @PositiveOrZero(message = "Count can`t be smaller than 0")
   private Integer count;
   private LocalDate created;
