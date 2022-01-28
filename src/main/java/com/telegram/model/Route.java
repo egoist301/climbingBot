@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -89,6 +91,17 @@ public class Route implements Serializable {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  @PrePersist
+  private void onCreate() {
+    created = LocalDate.now();
+    modified = LocalDate.now();
+  }
+
+  @PreUpdate
+  private void onUpdate() {
+    modified = LocalDate.now();
   }
 
   @Override
