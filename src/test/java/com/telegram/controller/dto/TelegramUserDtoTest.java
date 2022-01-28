@@ -29,8 +29,6 @@ public class TelegramUserDtoTest {
     TelegramUserDto userDto = new TelegramUserDto();
     userDto.setId(-1L);
     userDto.setFirstName("John");
-    userDto.setLastName("Wick");
-    userDto.setUserName("chapter");
     userDto.setChatId(1L);
 
     // When
@@ -48,8 +46,6 @@ public class TelegramUserDtoTest {
     // Given
     TelegramUserDto userDto = new TelegramUserDto();
     userDto.setFirstName("John");
-    userDto.setLastName("Wick");
-    userDto.setUserName("chapter");
     userDto.setChatId(-1L);
 
     // When
@@ -67,8 +63,7 @@ public class TelegramUserDtoTest {
     // Given
     TelegramUserDto userDto = new TelegramUserDto();
     userDto.setFirstName("John");
-    userDto.setLastName("Wick");
-    userDto.setUserName("chapter");
+
     // When
     Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
         validator.validate(userDto);
@@ -118,24 +113,6 @@ public class TelegramUserDtoTest {
   }
 
   @Test
-  public void usernameIsNull() {
-    // Given
-    TelegramUserDto userDto = new TelegramUserDto();
-    userDto.setFirstName("John");
-    userDto.setLastName("Wick");
-    userDto.setChatId(1L);
-
-    // When
-    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
-        validator.validate(userDto);
-
-    // Then
-    assertEquals(1, constraintViolations.size());
-    assertEquals("Username can`t be null and spaces!",
-                 constraintViolations.iterator().next().getMessage());
-  }
-
-  @Test
   public void usernameIsBlank() {
     // Given
     TelegramUserDto userDto = new TelegramUserDto();
@@ -150,7 +127,7 @@ public class TelegramUserDtoTest {
 
     // Then
     assertEquals(1, constraintViolations.size());
-    assertEquals("Username can`t be null and spaces!",
+    assertEquals("Username can`t be spaces!",
                  constraintViolations.iterator().next().getMessage());
   }
 }

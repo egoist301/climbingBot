@@ -20,10 +20,9 @@ public class TelegramFacadeImpl implements TelegramFacade {
 
   @Override
   public SendMessage handleUpdate(Update update) {
-    Long chatId = getChatId(update);
+    Long chatId = getChatIdFromMessage(update);
     String message = getInMessage(update);
-    User user = getUser(update);
-
+    User user = getUserFromMessage(update);
     TelegramUserDto userDto = getUserDto(user, chatId);
     return null;
   }
@@ -34,13 +33,13 @@ public class TelegramFacadeImpl implements TelegramFacade {
            update.getMessage().getText();
   }
 
-  private Long getChatId(Update update) {
+  private Long getChatIdFromMessage(Update update) {
     return update.hasEditedMessage() ?
            update.getEditedMessage().getChatId() :
            update.getMessage().getChatId();
   }
 
-  private User getUser(Update update) {
+  private User getUserFromMessage(Update update) {
     return update.hasEditedMessage() ?
            update.getEditedMessage().getFrom() :
            update.getMessage().getFrom();

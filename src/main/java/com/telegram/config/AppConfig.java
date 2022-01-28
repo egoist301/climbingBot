@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
 
@@ -29,7 +31,7 @@ public class AppConfig {
   }
 
   @Bean
-  public TelegramBotsApi telegramBotsApi() {
-    return new TelegramBotsApi();
+  public TelegramBotsApi telegramBotsApi() throws TelegramApiException {
+    return new TelegramBotsApi(DefaultBotSession.class);
   }
 }

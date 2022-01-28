@@ -1,6 +1,7 @@
 package com.telegram.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.telegram.service.validator.NullableNotBlank;
 import org.hibernate.validator.constraints.Length;
 import org.telegram.telegrambots.meta.api.objects.User;
 
@@ -18,11 +19,11 @@ public class TelegramUserDto {
   @Length(min = 2, max = 20,
           message = "First name should be less than 20 and bigger than 2 characters")
   private String firstName;
-  @NotBlank(message = "Last name can`t be null and spaces!")
+  @NullableNotBlank(message = "Last name can`t be spaces!")
   @Length(min = 2, max = 20,
           message = "Last name should be less than 20 and bigger than 2 characters")
   private String lastName;
-  @NotBlank(message = "Username can`t be null and spaces!")
+  @NullableNotBlank(message = "Username can`t be spaces!")
   @Length(min = 2, max = 20,
           message = "Username should be less than 20 and bigger than 2 characters")
   private String userName;

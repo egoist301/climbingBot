@@ -51,7 +51,7 @@ public class ClimbingBot extends TelegramLongPollingBot {
   }
 
   @PostConstruct
-  public void registryBot() {
+  public void registryBot() throws TelegramApiException {
     try {
       telegramBotsApi.registerBot(this);
     } catch (TelegramApiRequestException e) {

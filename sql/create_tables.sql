@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS users
 (
     id         SERIAL,
     first_name VARCHAR(20) NOT NULL,
-    last_name  VARCHAR(20) NOT NULL,
-    username   VARCHAR(20) NOT NULL,
+    last_name  VARCHAR(20) NULL,
+    username   VARCHAR(20) NULL,
     chat_id    INT         NOT NULL,
     created    TIMESTAMP   NOT NULL,
     modified   TIMESTAMP   NOT NULL,

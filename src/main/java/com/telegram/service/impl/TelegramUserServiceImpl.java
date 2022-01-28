@@ -66,8 +66,7 @@ public class TelegramUserServiceImpl implements TelegramUserService {
 
   @Override
   public TelegramUserDto findByChatId(Long chatId) {
-    TelegramUser user = telegramUserRepository.findByChatId(chatId)
-        .orElseThrow(() -> new ResourceNotFoundException(chatId));
+    TelegramUser user = telegramUserRepository.findByChatId(chatId);
     return telegramUserMapper.toDto(user);
   }
 }
