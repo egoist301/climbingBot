@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
+
+import javax.annotation.PostConstruct;
 
 @Service
 public class ClimbingBot extends TelegramLongPollingBot {
@@ -16,11 +20,14 @@ public class ClimbingBot extends TelegramLongPollingBot {
   @Value("${telegrambot.username}")
   private String botUserName;
 
+  private final TelegramBotsApi telegramBotsApi;
   private final TelegramFacade telegramFacade;
   private static final Logger logger = LogManager.getLogger(ClimbingBot.class);
 
   @Autowired
-  public ClimbingBot(TelegramFacade telegramFacade) {
+  public ClimbingBot(TelegramBotsApi telegramBotsApi,
+                     TelegramFacade telegramFacade) {
+    this.telegramBotsApi = telegramBotsApi;
     this.telegramFacade = telegramFacade;
   }
 
@@ -41,5 +48,14 @@ public class ClimbingBot extends TelegramLongPollingBot {
   @Override
   public String getBotToken() {
     return token;
+  }
+
+  @PostConstruct
+  public void registryBot() {
+    try {
+      telegramBotsApi.registerBot(this);
+    } catch (TelegramApiRequestException e) {
+      logger.error("Error occurred during bot registration.", e);
+    }
   }
 }
