@@ -1,7 +1,14 @@
 package com.telegram.model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,10 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +36,9 @@ public class TelegramUser implements Serializable {
   private LocalDate created;
   @Column(name = "modified")
   private LocalDate modified;
+  @Column(name = "state")
+  @Enumerated(EnumType.STRING)
+  private BotState botState;
   @OneToMany(mappedBy = "user")
   private Set<Route> routes;
 
@@ -100,10 +106,19 @@ public class TelegramUser implements Serializable {
     this.modified = modified;
   }
 
+  public BotState getBotState() {
+    return botState;
+  }
+
+  public void setBotState(BotState botState) {
+    this.botState = botState;
+  }
+
   @PrePersist
   private void onCreate() {
     created = LocalDate.now();
     modified = LocalDate.now();
+
   }
 
   @PreUpdate
@@ -117,25 +132,14 @@ public class TelegramUser implements Serializable {
     if (o == null || getClass() != o.getClass()) return false;
     TelegramUser user = (TelegramUser) o;
     return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) &&
-           Objects.equals(lastName, user.lastName) && Objects.equals(userName, user.userName) &&
-           Objects.equals(chatId, user.chatId) && Objects.equals(routes, user.routes) &&
-           Objects.equals(created, user.created) && Objects.equals(modified, user.modified);
+        Objects.equals(lastName, user.lastName) && Objects.equals(userName, user.userName) &&
+        Objects.equals(chatId, user.chatId) && Objects.equals(routes, user.routes) &&
+        Objects.equals(created, user.created) && Objects.equals(modified, user.modified) &&
+        Objects.equals(botState, user.botState);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, userName, chatId, routes, created, modified);
-  }
-
-  @Override
-  public String toString() {
-    return "User{" +
-           "id=" + id +
-           ", firstName='" + firstName + '\'' +
-           ", lastName='" + lastName + '\'' +
-           ", userName='" + userName + '\'' +
-           ", chatId=" + chatId +
-           ", routes=" + routes +
-           '}';
+    return Objects.hash(id, firstName, lastName, userName, chatId, routes, created, modified, botState);
   }
 }

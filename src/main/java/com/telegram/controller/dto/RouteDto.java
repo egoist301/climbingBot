@@ -1,24 +1,26 @@
 package com.telegram.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.telegram.model.Color;
+import java.time.LocalDate;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
-import java.time.LocalDate;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.telegram.model.Color;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RouteDto {
   @PositiveOrZero(message = "Id can`t be smaller than 0")
   private Long id;
   private Color color = Color.WHITE;
-  @Pattern(regexp = ".{0,255}", message = "Description can`t be bigger then 255 symbols")
-  private String description;
-  @NotNull(message = "Count can`t be null")
-  @PositiveOrZero(message = "Count can`t be smaller than 0")
-  private Integer count;
+  @NotBlank(message = "Attempt can`t be null and spaces!")
+  @Length(min = 1, max = 20,
+      message = "Attempt should be less than 20 and bigger than 1 characters")
+  private String attempt;
   private LocalDate created;
   @Valid
   private TelegramUserDto userDto;
@@ -42,20 +44,12 @@ public class RouteDto {
     this.color = color;
   }
 
-  public String getDescription() {
-    return description;
+  public String getAttempt() {
+    return attempt;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Integer getCount() {
-    return count;
-  }
-
-  public void setCount(Integer count) {
-    this.count = count;
+  public void setAttempt(String attempt) {
+    this.attempt = attempt;
   }
 
   public LocalDate getCreated() {

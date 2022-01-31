@@ -1,17 +1,18 @@
 package com.telegram.controller.dto;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 public class TelegramUserDtoTest {
@@ -32,13 +33,11 @@ public class TelegramUserDtoTest {
     userDto.setChatId(1L);
 
     // When
-    Set<ConstraintViolation<TelegramUserDto>> constraintViolations =
-        validator.validate(userDto);
+    Set<ConstraintViolation<TelegramUserDto>> constraintViolations = validator.validate(userDto);
 
     // Then
     assertEquals(1, constraintViolations.size());
-    assertEquals("Id can`t be smaller than 0",
-                 constraintViolations.iterator().next().getMessage());
+    assertEquals("Id can`t be smaller than 0", constraintViolations.iterator().next().getMessage());
   }
 
   @Test
@@ -55,7 +54,7 @@ public class TelegramUserDtoTest {
     // Then
     assertEquals(1, constraintViolations.size());
     assertEquals("Chat id can`t be smaller than 0",
-                 constraintViolations.iterator().next().getMessage());
+        constraintViolations.iterator().next().getMessage());
   }
 
   @Test
@@ -71,7 +70,7 @@ public class TelegramUserDtoTest {
     // Then
     assertEquals(1, constraintViolations.size());
     assertEquals("Chat id can`t be null",
-                 constraintViolations.iterator().next().getMessage());
+        constraintViolations.iterator().next().getMessage());
   }
 
   @Test
@@ -90,7 +89,7 @@ public class TelegramUserDtoTest {
     // Then
     assertEquals(1, constraintViolations.size());
     assertEquals("Username should be less than 20 and bigger than 2 characters",
-                 constraintViolations.iterator().next().getMessage());
+        constraintViolations.iterator().next().getMessage());
   }
 
   @Test
@@ -109,7 +108,7 @@ public class TelegramUserDtoTest {
     // Then
     assertEquals(1, constraintViolations.size());
     assertEquals("Username should be less than 20 and bigger than 2 characters",
-                 constraintViolations.iterator().next().getMessage());
+        constraintViolations.iterator().next().getMessage());
   }
 
   @Test
@@ -128,6 +127,6 @@ public class TelegramUserDtoTest {
     // Then
     assertEquals(1, constraintViolations.size());
     assertEquals("Username can`t be spaces!",
-                 constraintViolations.iterator().next().getMessage());
+        constraintViolations.iterator().next().getMessage());
   }
 }

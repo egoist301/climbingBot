@@ -1,15 +1,18 @@
 package com.telegram.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 import java.util.stream.Stream;
 
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public enum Color {
-  RED,
-  GREEN,
   WHITE,
   YELLOW,
+  ORANGE,
+  GREEN,
   BLUE,
+  RED,
   PURPLE;
 
   @JsonCreator
@@ -17,5 +20,12 @@ public enum Color {
     return Stream.of(Color.values())
         .filter(targetEnum -> targetEnum.equals(Color.valueOf(color.toUpperCase()))).findFirst()
         .orElse(null);
+  }
+
+  public InlineKeyboardButton getButton(String state) {
+    InlineKeyboardButton button = new InlineKeyboardButton();
+    button.setText(this.name().toLowerCase());
+    button.setCallbackData(state + ";" + this.name());
+    return button;
   }
 }

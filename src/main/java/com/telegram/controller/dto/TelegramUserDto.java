@@ -1,6 +1,7 @@
 package com.telegram.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.telegram.model.BotState;
 import com.telegram.service.validator.NullableNotBlank;
 import org.hibernate.validator.constraints.Length;
 import org.telegram.telegrambots.meta.api.objects.User;
@@ -30,6 +31,7 @@ public class TelegramUserDto {
   @NotNull(message = "Chat id can`t be null")
   @PositiveOrZero(message = "Chat id can`t be smaller than 0")
   private Long chatId;
+  private BotState botState = BotState.START;
   @Valid
   private Set<RouteDto> routeDtos;
 
@@ -89,5 +91,13 @@ public class TelegramUserDto {
 
   public void setRouteDtos(Set<RouteDto> routeDtos) {
     this.routeDtos = routeDtos;
+  }
+
+  public BotState getBotState() {
+    return botState;
+  }
+
+  public void setBotState(BotState botState) {
+    this.botState = botState;
   }
 }

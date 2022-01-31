@@ -1,5 +1,9 @@
 package com.telegram.model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
 @Table(name = "route")
@@ -26,10 +27,8 @@ public class Route implements Serializable {
   @Column(name = "color")
   @Enumerated(EnumType.STRING)
   public Color color;
-  @Column(name = "description")
-  private String description;
-  @Column(name = "count")
-  private Integer count;
+  @Column(name = "attempt")
+  private String attempt;
   @Column(name = "created")
   private LocalDate created;
   @Column(name = "modified")
@@ -53,20 +52,12 @@ public class Route implements Serializable {
     this.color = color;
   }
 
-  public String getDescription() {
-    return description;
+  public String getAttempt() {
+    return attempt;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Integer getCount() {
-    return count;
-  }
-
-  public void setCount(Integer count) {
-    this.count = count;
+  public void setAttempt(String attempt) {
+    this.attempt = attempt;
   }
 
   public LocalDate getCreated() {
@@ -110,26 +101,12 @@ public class Route implements Serializable {
     if (o == null || getClass() != o.getClass()) return false;
     Route route = (Route) o;
     return Objects.equals(id, route.id) && color == route.color &&
-           Objects.equals(description, route.description) && Objects.equals(count, route.count) &&
-           Objects.equals(created, route.created) && Objects.equals(modified, route.modified) &&
-           Objects.equals(user, route.user);
+        Objects.equals(attempt, route.attempt) && Objects.equals(created, route.created) &&
+        Objects.equals(modified, route.modified) && Objects.equals(user, route.user);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, color, description, count, created, modified, user);
-  }
-
-  @Override
-  public String toString() {
-    return "Route{" +
-           "id=" + id +
-           ", color=" + color +
-           ", description='" + description + '\'' +
-           ", count=" + count +
-           ", created=" + created +
-           ", modified=" + modified +
-           ", user=" + user +
-           '}';
+    return Objects.hash(id, color, attempt, created, modified, user);
   }
 }

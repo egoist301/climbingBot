@@ -1,31 +1,36 @@
 package com.telegram.service.impl;
 
-import com.telegram.controller.dto.RouteDto;
-import com.telegram.controller.dto.RouteSearchCriteriaDto;
-import com.telegram.model.Route;
-import com.telegram.repository.RouteRepository;
-import com.telegram.service.RouteService;
-import com.telegram.service.exception.ResourceNotFoundException;
-import com.telegram.service.mapper.RouteMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
+import static com.telegram.repository.specification.RouteSpecification.exists;
 import static com.telegram.repository.specification.RouteSpecification.findByColor;
 import static com.telegram.repository.specification.RouteSpecification.findByCreated;
 import static com.telegram.repository.specification.RouteSpecification.findByUserId;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import com.telegram.controller.dto.RouteDto;
+import com.telegram.controller.dto.RouteSearchCriteriaDto;
+import com.telegram.model.Route;
+import com.telegram.repository.RouteRepository;
+import com.telegram.repository.TelegramUserRepository;
+import com.telegram.service.RouteService;
+import com.telegram.service.exception.ResourceNotFoundException;
+import com.telegram.service.mapper.RouteMapper;
+
 @Service
 public class RouteServiceImpl implements RouteService {
   private final RouteRepository routeRepository;
+  private final TelegramUserRepository userRepository;
   private final RouteMapper routeMapper;
 
   @Autowired
   public RouteServiceImpl(RouteRepository routeRepository,
-                          RouteMapper routeMapper) {
+                          TelegramUserRepository userRepository, RouteMapper routeMapper) {
     this.routeRepository = routeRepository;
+    this.userRepository = userRepository;
     this.routeMapper = routeMapper;
   }
 
@@ -40,8 +45,7 @@ public class RouteServiceImpl implements RouteService {
     Route route = routeRepository.findById(routeDto.getId())
         .orElseThrow(() -> new ResourceNotFoundException(routeDto.getId()));
     route.setColor(routeDto.getColor());
-    route.setCount(routeDto.getCount());
-    route.setDescription(routeDto.getDescription());
+    route.setAttempt(routeDto.getAttempt());
     return routeMapper.toDto(routeRepository.save(route));
   }
 
@@ -59,9 +63,12 @@ public class RouteServiceImpl implements RouteService {
 
   private Specification<Route> buildSpecification(RouteSearchCriteriaDto criteriaDto) {
     Specification<Route> specification =
-        Specification.where(findByCreated(criteriaDto.getCreated()));
+        Specification.where(exists());
+    if (criteriaDto.getCreated() != null) {
+      specification = specification.and(findByCreated(criteriaDto.getCreated()));
+    }
     if (criteriaDto.getUserId() != null) {
-      specification = specification.and(findByUserId(criteriaDto.getUserId()));
+      specification = specification.and(findByUserId(userRepository.findById(criteriaDto.getUserId()).get()));
     }
     if (criteriaDto.getColor() != null) {
       specification = specification.and(findByColor(criteriaDto.getColor()));

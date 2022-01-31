@@ -1,5 +1,10 @@
 package com.telegram.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.telegram.controller.dto.TelegramUserDto;
 import com.telegram.model.TelegramUser;
 import com.telegram.repository.TelegramUserRepository;
@@ -7,10 +12,6 @@ import com.telegram.service.TelegramUserService;
 import com.telegram.service.exception.ResourceNotFoundException;
 import com.telegram.service.mapper.RouteMapper;
 import com.telegram.service.mapper.TelegramUserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TelegramUserServiceImpl implements TelegramUserService {
@@ -39,7 +40,11 @@ public class TelegramUserServiceImpl implements TelegramUserService {
         .orElseThrow(() -> new ResourceNotFoundException(userDto.getId()));
     user.setFirstName(userDto.getFirstName());
     user.setLastName(userDto.getLastName());
-    user.setRoutes(routeMapper.toEntitySet(userDto.getRouteDtos()));
+    user.setUserName(userDto.getUserName());
+    user.setBotState(userDto.getBotState());
+    if (userDto.getRouteDtos() != null) {
+      user.setRoutes(routeMapper.toEntitySet(userDto.getRouteDtos()));
+    }
     return telegramUserMapper.toDto(telegramUserRepository.save(user));
   }
 

@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS users
     first_name VARCHAR(20) NOT NULL,
     last_name  VARCHAR(20) NULL,
     username   VARCHAR(20) NULL,
+    state      VARCHAR(20) NOT NULL,
     chat_id    INT         NOT NULL,
     created    TIMESTAMP   NOT NULL,
     modified   TIMESTAMP   NOT NULL,
@@ -14,8 +15,7 @@ CREATE TABLE IF NOT EXISTS route
 (
     id          SERIAL,
     color       VARCHAR(20)  NOT NULL,
-    description VARCHAR(250) NULL,
-    count       INT          NOT NULL,
+    attempt     VARCHAR(20)  NULL,
     created     TIMESTAMP    NOT NULL,
     modified    TIMESTAMP    NOT NULL,
     user_id     INT          NOT NULL,
