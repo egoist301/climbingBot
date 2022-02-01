@@ -1,9 +1,10 @@
 package com.telegram.service;
 
-import com.telegram.controller.dto.TelegramUserDto;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.telegram.controller.dto.TelegramUserDto;
 
 @Service
 public interface TelegramUserService {
@@ -13,7 +14,7 @@ public interface TelegramUserService {
 
   void delete(Long id);
 
-  List<TelegramUserDto> findAll();
+  Set<TelegramUserDto> findAll();
 
   TelegramUserDto findById(Long id);
 

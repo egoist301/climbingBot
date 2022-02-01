@@ -5,8 +5,14 @@ import java.util.stream.Stream;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum BotState {
-  NONE,
-  START;
+  START,
+  VIEW,
+  WORK,
+  ADD,
+  EDIT,
+  DELETE,
+  GET_ALL_BY_DATE,
+  GET_ALL_BY_COLOR;
 
   @JsonCreator
   public static Color decode(final String color) {

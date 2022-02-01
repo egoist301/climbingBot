@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import com.telegram.bot.command.Command;
 import com.telegram.controller.dto.TelegramUserDto;
+import com.telegram.model.BotState;
 
 public class GetAllByDateCommand implements Command {
   @Override
@@ -19,6 +20,7 @@ public class GetAllByDateCommand implements Command {
     SendMessage sendMessage = new SendMessage();
     sendMessage.setText("Enter date");
     sendMessage.setReplyMarkup(buildAvailableCommands());
+    userDto.setBotState(BotState.GET_ALL_BY_DATE);
     return sendMessage;
   }
 

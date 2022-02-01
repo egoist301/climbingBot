@@ -33,7 +33,7 @@ public class Route implements Serializable {
   private LocalDate created;
   @Column(name = "modified")
   private LocalDate modified;
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.MERGE)
   private TelegramUser user;
 
   public Long getId() {

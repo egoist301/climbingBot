@@ -15,6 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import com.telegram.bot.command.Command;
 import com.telegram.controller.dto.TelegramUserDto;
+import com.telegram.model.BotState;
 
 public class WorkWithRouteCommand implements Command {
   @Override
@@ -22,6 +23,7 @@ public class WorkWithRouteCommand implements Command {
     SendMessage sendMessage = new SendMessage();
     sendMessage.setText("Choose operation");
     sendMessage.setReplyMarkup(buildAvailableCommands());
+    userDto.setBotState(BotState.WORK);
     return sendMessage;
   }
 

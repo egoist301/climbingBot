@@ -29,32 +29,26 @@ public class TelegramFacadeImpl implements TelegramFacade {
   public SendMessage handleUpdate(Update update) {
     Long chatId;
     SendMessage sendMessage;
+    TelegramUserDto userDto;
     if (update.hasCallbackQuery()) {
       chatId = update.getCallbackQuery().getMessage().getChatId();
-      sendMessage = handleCallback(update, chatId);
+      String message = update.getCallbackQuery().getData();
+      User user = update.getCallbackQuery().getFrom();
+      userDto = getTelegramUserDto(chatId, user);
+      sendMessage = commandFactory.getCommand(message).execute(userDto);
     } else if (update.hasMessage()) {
       chatId = update.getMessage().getChatId();
-      sendMessage = handleMessage(update, chatId);
+      String message = update.getMessage().getText();
+      User user = update.getMessage().getFrom();
+      userDto = getTelegramUserDto(chatId, user);
+      sendMessage = messageHandlerFactory.getHandler(userDto.getBotState()).handle(userDto, message);
     } else {
       throw new RuntimeException();
     }
+    userService.update(userDto);
     sendMessage.setChatId(chatId.toString());
     sendMessage.enableMarkdown(true);
     return sendMessage;
-  }
-
-  private SendMessage handleMessage(Update update, Long chatId) {
-    String message = update.getMessage().getText();
-    User user = update.getMessage().getFrom();
-    TelegramUserDto userDto = getTelegramUserDto(chatId, user);
-    return messageHandlerFactory.getHandler(userDto.getBotState()).handle(userDto, message);
-  }
-
-  private SendMessage handleCallback(Update update, Long chatId) {
-    String message = update.getCallbackQuery().getData();
-    User user = update.getCallbackQuery().getFrom();
-    TelegramUserDto userDto = getTelegramUserDto(chatId, user);
-    return commandFactory.getCommand(message).execute(userDto);
   }
 
   private TelegramUserDto getTelegramUserDto(Long chatId, User user) {

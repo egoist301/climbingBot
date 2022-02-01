@@ -1,11 +1,7 @@
-package com.telegram.bot.command.impl.view;
+package com.telegram.bot.command.impl.work;
 
 import static com.telegram.bot.command.CommandType.CANCEL;
-import static com.telegram.bot.command.CommandType.GET_ALL;
-import static com.telegram.bot.command.CommandType.GET_ALL_BY_COLOR;
-import static com.telegram.bot.command.CommandType.GET_ALL_BY_DATE;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,21 +13,20 @@ import com.telegram.bot.command.Command;
 import com.telegram.controller.dto.TelegramUserDto;
 import com.telegram.model.BotState;
 
-public class ViewRoutesCommand implements Command {
+public class AddCommand implements Command {
   @Override
   public SendMessage execute(TelegramUserDto userDto) {
     SendMessage sendMessage = new SendMessage();
-    sendMessage.setText("Choose operation");
+    sendMessage.setText("Add route\nEnter color and attempt(for example: color;attempt)");
     sendMessage.setReplyMarkup(buildAvailableCommands());
-    userDto.setBotState(BotState.VIEW);
+    userDto.setBotState(BotState.ADD);
     return sendMessage;
   }
 
   private ReplyKeyboard buildAvailableCommands() {
     InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-    List<InlineKeyboardButton> firstRow = List.of(GET_ALL.getButton(), GET_ALL_BY_DATE.getButton(), GET_ALL_BY_COLOR.getButton());
-    List<InlineKeyboardButton> secondRow = Collections.singletonList(CANCEL.getButton());
-    inlineKeyboardMarkup.setKeyboard(List.of(firstRow, secondRow));
+    List<List<InlineKeyboardButton>> rowList = List.of(List.of(CANCEL.getButton()));
+    inlineKeyboardMarkup.setKeyboard(rowList);
     return inlineKeyboardMarkup;
   }
 }

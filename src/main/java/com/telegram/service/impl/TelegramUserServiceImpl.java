@@ -1,6 +1,6 @@
 package com.telegram.service.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,8 +57,8 @@ public class TelegramUserServiceImpl implements TelegramUserService {
   }
 
   @Override
-  public List<TelegramUserDto> findAll() {
-    return telegramUserMapper.toDtoList(telegramUserRepository.findAll());
+  public Set<TelegramUserDto> findAll() {
+    return telegramUserMapper.toDtoSet(telegramUserRepository.findAll());
   }
 
   @Override

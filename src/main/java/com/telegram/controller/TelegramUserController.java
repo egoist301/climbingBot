@@ -1,7 +1,9 @@
 package com.telegram.controller;
 
-import com.telegram.controller.dto.TelegramUserDto;
-import com.telegram.service.TelegramUserService;
+import java.util.Set;
+
+import javax.validation.Valid;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
-import java.util.List;
+import com.telegram.controller.dto.TelegramUserDto;
+import com.telegram.service.TelegramUserService;
 
 @RestController
 @RequestMapping("/users")
@@ -34,7 +36,7 @@ public class TelegramUserController {
   }
 
   @GetMapping
-  public ResponseEntity<List<TelegramUserDto>> getAll() {
+  public ResponseEntity<Set<TelegramUserDto>> getAll() {
     return new ResponseEntity<>(telegramUserService.findAll(), HttpStatus.OK);
   }
 
@@ -43,7 +45,7 @@ public class TelegramUserController {
     TelegramUserDto savedUser = telegramUserService.save(userDto);
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                                .buildAndExpand(savedUser.getId()).toUri());
+        .buildAndExpand(savedUser.getId()).toUri());
     return new ResponseEntity<>(savedUser, httpHeaders, HttpStatus.CREATED);
   }
 

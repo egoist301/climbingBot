@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.Length;
@@ -66,5 +65,13 @@ public class RouteDto {
 
   public void setUserDto(TelegramUserDto userDto) {
     this.userDto = userDto;
+  }
+
+  @Override
+  public String toString() {
+    return "id=" + id +
+        "\ncolor=" + color +
+        "\nattempt='" + attempt + '\'' +
+        "\ncreated=" + created + "\n";
   }
 }

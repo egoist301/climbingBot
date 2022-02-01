@@ -5,7 +5,7 @@ import static com.telegram.repository.specification.RouteSpecification.findByCol
 import static com.telegram.repository.specification.RouteSpecification.findByCreated;
 import static com.telegram.repository.specification.RouteSpecification.findByUserId;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -56,9 +56,9 @@ public class RouteServiceImpl implements RouteService {
   }
 
   @Override
-  public List<RouteDto> findAll(RouteSearchCriteriaDto criteria) {
+  public Set<RouteDto> findAll(RouteSearchCriteriaDto criteria) {
     Specification<Route> routeSpecification = buildSpecification(criteria);
-    return routeMapper.toDtoList(routeRepository.findAll(routeSpecification));
+    return routeMapper.toDtoSet(routeRepository.findAll(routeSpecification));
   }
 
   private Specification<Route> buildSpecification(RouteSearchCriteriaDto criteriaDto) {

@@ -1,7 +1,6 @@
 package com.telegram.service.mapper;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 public interface Mapper<E, D> {
@@ -9,7 +8,7 @@ public interface Mapper<E, D> {
 
   D toDto(E e);
 
-  List<D> toDtoList(List<E> eList);
+  Set<D> toDtoSet(Collection<E> eList);
 
   Set<E> toEntitySet(Collection<D> dList);
 }

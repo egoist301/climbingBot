@@ -21,11 +21,4 @@ public enum Color {
         .filter(targetEnum -> targetEnum.equals(Color.valueOf(color.toUpperCase()))).findFirst()
         .orElse(null);
   }
-
-  public InlineKeyboardButton getButton() {
-    InlineKeyboardButton button = new InlineKeyboardButton();
-    button.setText(this.name().toLowerCase());
-    button.setCallbackData(this.name());
-    return button;
-  }
 }

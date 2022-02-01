@@ -1,10 +1,11 @@
 package com.telegram.service;
 
-import com.telegram.controller.dto.RouteDto;
-import com.telegram.controller.dto.RouteSearchCriteriaDto;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.telegram.controller.dto.RouteDto;
+import com.telegram.controller.dto.RouteSearchCriteriaDto;
 
 @Service
 public interface RouteService {
@@ -14,7 +15,7 @@ public interface RouteService {
 
   void delete(Long id);
 
-  List<RouteDto> findAll(RouteSearchCriteriaDto criteria);
+  Set<RouteDto> findAll(RouteSearchCriteriaDto criteria);
 
   RouteDto findById(Long id);
 }
