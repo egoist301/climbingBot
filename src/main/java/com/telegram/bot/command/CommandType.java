@@ -10,7 +10,6 @@ public enum CommandType {
   GET_ALL("get all"),
   GET_ALL_BY_DATE("get all by date"),
   GET_ALL_BY_COLOR("get all by color"),
-  SELECT_COLOR("select color"),
   WORK_WITH_ROUTE("work with route"),
   VIEW_ROUTES("view routes");
 

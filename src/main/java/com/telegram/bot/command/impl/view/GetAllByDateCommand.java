@@ -17,9 +17,7 @@ public class GetAllByDateCommand implements Command {
   public SendMessage execute(TelegramUserDto userDto) {
 
     SendMessage sendMessage = new SendMessage();
-    sendMessage.setChatId(userDto.getChatId().toString());
     sendMessage.setText("Enter date");
-    sendMessage.enableMarkdown(true);
     sendMessage.setReplyMarkup(buildAvailableCommands());
     return sendMessage;
   }

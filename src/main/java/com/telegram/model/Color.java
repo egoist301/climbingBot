@@ -22,10 +22,10 @@ public enum Color {
         .orElse(null);
   }
 
-  public InlineKeyboardButton getButton(String state) {
+  public InlineKeyboardButton getButton() {
     InlineKeyboardButton button = new InlineKeyboardButton();
     button.setText(this.name().toLowerCase());
-    button.setCallbackData(state + ";" + this.name());
+    button.setCallbackData(this.name());
     return button;
   }
 }
