@@ -5,10 +5,11 @@ import com.telegram.controller.dto.RouteSearchCriteriaDto;
 import com.telegram.controller.dto.TelegramUserDto;
 import com.telegram.model.Color;
 import com.telegram.service.RouteService;
+import com.telegram.service.builder.RouteMessageBuilder;
 
 public class GetAllByGreenCommand extends GetAllBaseCommand {
-  public GetAllByGreenCommand(RouteService routeService) {
-    super(routeService);
+  public GetAllByGreenCommand(RouteService routeService, RouteMessageBuilder routeMessageBuilder) {
+    super(routeService, routeMessageBuilder);
   }
 
   @Override
