@@ -12,6 +12,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Set;
 
+import lombok.Data;
+
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TelegramUserDto {
   @PositiveOrZero(message = "Id can`t be smaller than 0")
@@ -43,61 +46,5 @@ public class TelegramUserDto {
     this.firstName = user.getFirstName();
     this.lastName = user.getLastName();
     this.chatId = chatId;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String getUserName() {
-    return userName;
-  }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  public Long getChatId() {
-    return chatId;
-  }
-
-  public void setChatId(Long chatId) {
-    this.chatId = chatId;
-  }
-
-  public Set<RouteDto> getRouteDtos() {
-    return routeDtos;
-  }
-
-  public void setRouteDtos(Set<RouteDto> routeDtos) {
-    this.routeDtos = routeDtos;
-  }
-
-  public BotState getBotState() {
-    return botState;
-  }
-
-  public void setBotState(BotState botState) {
-    this.botState = botState;
   }
 }

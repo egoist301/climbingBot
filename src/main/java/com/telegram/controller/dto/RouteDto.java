@@ -11,6 +11,9 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.telegram.model.Color;
 
+import lombok.Data;
+
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RouteDto {
   @PositiveOrZero(message = "Id can`t be smaller than 0")
@@ -23,55 +26,4 @@ public class RouteDto {
   private LocalDate created;
   @Valid
   private TelegramUserDto userDto;
-
-  public RouteDto() {
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Color getColor() {
-    return color;
-  }
-
-  public void setColor(Color color) {
-    this.color = color;
-  }
-
-  public String getAttempt() {
-    return attempt;
-  }
-
-  public void setAttempt(String attempt) {
-    this.attempt = attempt;
-  }
-
-  public LocalDate getCreated() {
-    return created;
-  }
-
-  public void setCreated(LocalDate created) {
-    this.created = created;
-  }
-
-  public TelegramUserDto getUserDto() {
-    return userDto;
-  }
-
-  public void setUserDto(TelegramUserDto userDto) {
-    this.userDto = userDto;
-  }
-
-  @Override
-  public String toString() {
-    return "id=" + id +
-        "\ncolor=" + color +
-        "\nattempt='" + attempt + '\'' +
-        "\ncreated=" + created + "\n";
-  }
 }

@@ -17,6 +17,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "users")
 public class TelegramUser implements Serializable {
@@ -42,104 +45,14 @@ public class TelegramUser implements Serializable {
   @OneToMany(mappedBy = "user")
   private Set<Route> routes;
 
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String getUserName() {
-    return userName;
-  }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  public Long getChatId() {
-    return chatId;
-  }
-
-  public void setChatId(Long chatId) {
-    this.chatId = chatId;
-  }
-
-  public Set<Route> getRoutes() {
-    return routes;
-  }
-
-  public void setRoutes(Set<Route> routes) {
-    this.routes = routes;
-  }
-
-  public LocalDate getCreated() {
-    return created;
-  }
-
-  public void setCreated(LocalDate created) {
-    this.created = created;
-  }
-
-  public LocalDate getModified() {
-    return modified;
-  }
-
-  public void setModified(LocalDate modified) {
-    this.modified = modified;
-  }
-
-  public BotState getBotState() {
-    return botState;
-  }
-
-  public void setBotState(BotState botState) {
-    this.botState = botState;
-  }
-
   @PrePersist
   private void onCreate() {
     created = LocalDate.now();
     modified = LocalDate.now();
-
   }
 
   @PreUpdate
   private void onUpdate() {
     modified = LocalDate.now();
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    TelegramUser user = (TelegramUser) o;
-    return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) &&
-        Objects.equals(lastName, user.lastName) && Objects.equals(userName, user.userName) &&
-        Objects.equals(chatId, user.chatId) && Objects.equals(routes, user.routes) &&
-        Objects.equals(created, user.created) && Objects.equals(modified, user.modified) &&
-        Objects.equals(botState, user.botState);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstName, lastName, userName, chatId, routes, created, modified, botState);
   }
 }
