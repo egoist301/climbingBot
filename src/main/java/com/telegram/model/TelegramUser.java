@@ -2,7 +2,6 @@ package com.telegram.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -25,21 +24,16 @@ import lombok.Data;
 public class TelegramUser implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false, unique = true)
   private Long id;
-  @Column(name = "first_name", length = 20)
+  @Column(name = "first_name", length = 20, nullable = false)
   private String firstName;
   @Column(name = "last_name", length = 20)
   private String lastName;
   @Column(name = "username", length = 20)
   private String userName;
-  @Column(name = "chat_id")
   private Long chatId;
-  @Column(name = "created")
   private LocalDate created;
-  @Column(name = "modified")
   private LocalDate modified;
-  @Column(name = "state")
   @Enumerated(EnumType.STRING)
   private BotState botState;
   @OneToMany(mappedBy = "user")

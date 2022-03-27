@@ -2,10 +2,8 @@ package com.telegram.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,16 +23,11 @@ import lombok.Data;
 public class Route implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false, unique = true)
   private Long id;
-  @Column(name = "color")
   @Enumerated(EnumType.STRING)
   public Color color;
-  @Column(name = "attempt")
   private String attempt;
-  @Column(name = "created")
   private LocalDate created;
-  @Column(name = "modified")
   private LocalDate modified;
   @ManyToOne(cascade = CascadeType.MERGE)
   private TelegramUser user;
