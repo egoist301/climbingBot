@@ -4,7 +4,6 @@ databaseChangeLog:
       author: Yauheni Filipovich
       changes:
         - createTable:
-            schemaName: climbingBot
             tableName: users
             columns:
               - column:
@@ -50,7 +49,6 @@ databaseChangeLog:
       author: Yauheni Filipovich
       changes:
         - createTable:
-            schemaName: climbingBot
             tableName: route
             columns:
               - column:
@@ -88,8 +86,6 @@ databaseChangeLog:
       author: Yauheni Filipovich
       changes:
         - addForeignKeyConstraint:
-            baseTableSchemaName: climbingBot
-            referencedTableSchemaName: climbingBot
             baseTableName: route
             referencedTableName: users
             baseColumnNames: user_id
